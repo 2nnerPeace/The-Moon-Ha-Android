@@ -64,6 +64,7 @@ class SignInFragment : Fragment() {
                 sharedPreferencesManager.setIsLogin(true)
                 Log.i("shared : ", sharedPreferencesManager.getIsLogin().toString())
                 Log.i("shared : ", sharedPreferencesManager.getLoginToken().toString())
+                // 로그인에 성공하면 FCM 토큰 저장
                 getFcmToken()
                 findNavController().navigate(R.id.action_signInFragment_to_fragment_lesson)
             } else {
@@ -72,7 +73,7 @@ class SignInFragment : Fragment() {
         }
     }
 
-    // FCM 토큰 가져오기
+    // FCM 토큰 가져와서 저장
     private fun getFcmToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (!task.isSuccessful) {

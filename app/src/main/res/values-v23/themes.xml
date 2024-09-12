@@ -25,7 +25,7 @@
 
     <!-- 커스텀 텍스트 스타일 정의 -->
     <style name="BottomNavigationTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">13dp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <!-- BottomNavigationView 스타일 정의 -->

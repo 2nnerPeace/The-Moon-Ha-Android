@@ -14,6 +14,18 @@ import com.google.firebase.messaging.RemoteMessage
 import com.innerpeace.themoonha.R
 import com.innerpeace.themoonha.ui.activity.common.MainActivity
 
+/**
+ * FCM 서비스
+ * @author 조희정
+ * @since 2024.09.11
+ * @version 1.0
+ *
+ * <pre>
+ * 수정일        수정자        수정내용
+ * ----------  --------    ---------------------------
+ * 2024.09.11  	조희정       최초 생성
+ * </pre>
+ */
 class FcmService : FirebaseMessagingService() {
 
     // 메시지 수신

@@ -58,22 +58,6 @@ class MainActivity : AppCompatActivity() {
         // 하단 네비게이션바 설정
         val navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
         binding.bottomNavigationView.setupWithNavController(navController)
-
-
-        // 디바이스가 어플에 접속할 때 토큰 저장
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            // FCM 등록 토큰 가져오기
-            val token = task.result
-
-            val msg = "FCM Registration token: " + token;
-            Log.d(TAG, msg)
-            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-        })
     }
 
     // 툴바 제목 설정
