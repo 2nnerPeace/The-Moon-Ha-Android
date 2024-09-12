@@ -7,6 +7,7 @@ import okhttp3.Interceptor
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -22,10 +23,15 @@ object ApiClient {
     }
 
     private fun createClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
         return OkHttpClient.Builder()
             .cookieJar(JavaNetCookieJar(CookieManager()))
             .addInterceptor(CookieInterceptor(sharedPreferencesManager))
             .addInterceptor(RequestInterceptor(sharedPreferencesManager))
+            .addInterceptor(loggingInterceptor)
             .build()
     }
 

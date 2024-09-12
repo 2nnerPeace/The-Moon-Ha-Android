@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "227568716865",
+    "project_id": "themoonha-da0dc",
+    "storage_bucket": "themoonha-da0dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227568716865:android:98ca8debe9934cf01c0ac0",
+        "android_client_info": {
+          "package_name": "com.innerpeace.themoonha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt-3yY_ycCo160Z8WHLMRdM8DaSlfXifI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

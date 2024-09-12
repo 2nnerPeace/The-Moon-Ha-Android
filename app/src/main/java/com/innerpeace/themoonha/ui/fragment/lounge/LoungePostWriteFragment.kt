@@ -140,12 +140,13 @@ class LoungePostWriteFragment : Fragment() {
     private fun registerPost() {
 
         val contentText = binding.content.text.toString()
+        val noticeYn = binding.cbNoticeYn.isChecked
 
         val selectedLoungeId = viewModel.selectedLoungeId.value ?: 0L
         val loungePostRequest = LoungePostRequest(
             content = contentText,
             loungeId = selectedLoungeId,
-            noticeYn = false
+            noticeYn = noticeYn
         )
         viewModel.registerLoungePost(loungePostRequest, images, requireContext())
 
