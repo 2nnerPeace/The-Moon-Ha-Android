@@ -58,7 +58,7 @@ class ScheduleWeeklyViewHolder(view: View, private val fragment: Fragment, priva
 
         // 1. 수업이 없으면 17:00부터 아래까지 삭제
         if (scheduleWeeklyResponseList.isEmpty()) {
-            removeCellsAfterLastClass(17, 0)
+            removeCellsAfterLastClass(15, 0)
             return
         }
 
@@ -121,8 +121,8 @@ class ScheduleWeeklyViewHolder(view: View, private val fragment: Fragment, priva
         }
 
         // 2. 가장 늦게 끝나는 수업이 17:00 이전이면 17:00부터 삭제
-        if (latestHour < 17 || (latestHour == 17 && latestMinute == 0)) {
-            removeCellsAfterLastClass(17, 0)
+        if (latestHour < 15 || (latestHour == 15 && latestMinute == 0)) {
+            removeCellsAfterLastClass(15, 0)
         }
         // 3. 가장 늦게 끝나는 수업이 17:00 이후에 끝난다면, 해당 수업 종료시간 + 1의 00분부터 삭제
         else {

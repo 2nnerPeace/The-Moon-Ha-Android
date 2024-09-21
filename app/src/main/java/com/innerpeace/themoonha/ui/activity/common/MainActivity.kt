@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -40,13 +41,13 @@ import com.kakao.sdk.common.KakaoSdk
  */
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // FCM
         FirebaseApp.initializeApp(this)
-        handleIntent(intent)
 
         ApiClient.init(this)
 
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(drawable)
 
         // 하단 네비게이션바 설정
-        val navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
+        navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
         binding.bottomNavigationView.setupWithNavController(navController)
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -79,6 +80,10 @@ class MainActivity : AppCompatActivity() {
             hideBottomNavigation() // 로그인 페이지에서는 네비게이션 바 숨기기
             hideToolbar() // 필요에 따라 툴바도 숨기기
         }
+
+        // FCM 페이지 이동 설정
+        handleIntent(intent)
+
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -88,33 +93,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // 알림 인텐트를 처리하고, NavController로 Fragment 전환
     private fun handleIntent(intent: Intent) {
         val targetFragment = intent.getStringExtra("Fragment")
+
         if (targetFragment != null) {
             when (targetFragment) {
                 "loungeHomeFragment" -> {
                     val loungeId = intent.getLongExtra("loungeId", -1)
                     if (loungeId != -1L) {
-                        // LoungeHomeFragment로 이동
-                        saveAndChangeFragment(LoungeHomeFragment().apply {
-                            arguments = Bundle().apply { putLong("loungeId", loungeId) }
-                        })
+                        val bundle = Bundle().apply { putLong("loungeId", loungeId) }
+                        navController.navigate(R.id.action_global_loungeHomeFragment, bundle)
                     }
                 }
                 "liveFragment" -> {
-                    saveAndChangeFragment(LiveMyLessonListFragment())
+                    navController.navigate(R.id.action_global_myLiveLesson)
                 }
             }
         }
     }
-
-    fun saveAndChangeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
 
     // 툴바 제목 설정
     fun setToolbarTitle(title: String) {

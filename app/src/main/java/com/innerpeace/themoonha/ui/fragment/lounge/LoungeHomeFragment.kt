@@ -62,6 +62,7 @@ class LoungeHomeFragment : Fragment() {
 
         // 네비게이션바
         (activity as? MainActivity)?.hideNavigationBar()
+        (activity as? MainActivity)?.showToolbar()
 
         return view
     }

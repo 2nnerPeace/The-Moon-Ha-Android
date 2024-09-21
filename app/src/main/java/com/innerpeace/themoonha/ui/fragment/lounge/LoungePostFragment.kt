@@ -18,6 +18,7 @@ import com.innerpeace.themoonha.data.network.ApiClient
 import com.innerpeace.themoonha.data.network.LoungeService
 import com.innerpeace.themoonha.data.repository.LoungeRepository
 import com.innerpeace.themoonha.databinding.FragmentLoungePostBinding
+import com.innerpeace.themoonha.ui.activity.common.MainActivity
 import com.innerpeace.themoonha.viewModel.LoungeViewModel
 import com.innerpeace.themoonha.viewModel.factory.LoungeViewModelFactory
 
@@ -53,6 +54,9 @@ class LoungePostFragment : Fragment() {
     ): View? {
         _binding = FragmentLoungePostBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        (activity as? MainActivity)?.showToolbar()
+
 
         return view
     }

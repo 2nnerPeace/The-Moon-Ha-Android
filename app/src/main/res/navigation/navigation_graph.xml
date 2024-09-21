@@ -4,6 +4,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/navigation_graph"
         app:startDestination="@id/mainFragment">
+
+    <action
+            android:id="@+id/action_global_loungeHomeFragment"
+            app:destination="@id/loungeHomeFragment" />
+
+    <action
+            android:id="@+id/action_global_myLiveLesson"
+            app:destination="@id/fragment_myLiveLesson" />
+
     <fragment
             android:id="@+id/fragment_lesson"
             android:name="com.innerpeace.themoonha.ui.fragment.lesson.LessonFragment"

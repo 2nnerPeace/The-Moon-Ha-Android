@@ -87,6 +87,14 @@ class ScheduleWeeklyFragment : Fragment() {
         // ViewPager 설정
         viewPager = binding.vpWeeklyTable
 
+        // 드래그 이동 막기
+        viewPager.getChildAt(0).setOnTouchListener { _, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_MOVE -> true
+                else -> false
+            }
+        }
+
         // 1. 초기 데이터 리스트 설정
         standardSundayCalendarList = getWeeklyDates().toMutableList() // 초기 주차 데이터
         standardSundayStringList = standardSundayCalendarList.map { dateFormat.format(it.time) }.toMutableList() // Calendar를 String으로 변환
@@ -106,7 +114,6 @@ class ScheduleWeeklyFragment : Fragment() {
                 // 어댑터 재설정
                 adapter = ScheduleWeeklyAdapter(it, standardSundayCalendarList, this, loungeViewModel)
                 viewPager.adapter = adapter
-
                 // 기본적으로 중간 페이지 (2024-09-15) 보여주기
                 viewPager.post {
                     viewPager.currentItem = 1
